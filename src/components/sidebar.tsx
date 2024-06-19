@@ -11,6 +11,7 @@ import {
   VideoIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const routes = [
   {
@@ -52,6 +53,7 @@ const routes = [
 ];
 
 export default function Sidebar() {
+  const pathname = usePathname();
   return (
     <div className="flex flex-col space-y-4 p-4 h-full text-white bg-[#111827]">
       <div className="px-3 py-2 flex-1">
@@ -66,7 +68,10 @@ export default function Sidebar() {
             <Link
               href={route.href}
               key={route.href}
-              className="textsm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-[#1F2937] rounded-md transition-colors duration-200 ease-in-out"
+              className={cn(
+                "textsm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-[#1F2937] rounded-md transition-colors duration-200 ease-in-out",
+                pathname === route.href ? "bg-[#1F2937]" : ""
+              )}
             >
               <div className="flex items-center flex-1">
                 <route.icon className={cn("h-5 w-5 mr-3", route.color)} />
